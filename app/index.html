@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Neon Coast Cover Studio — turn your photo into poster cover art</title>
+<meta name="description" content="An offline cover art maker: your photo and a caption become a multi-panel GTA-style poster with a sunset or neon grade, exported as a PNG.">
+<link rel="stylesheet" href="./style.css">
+</head>
+<body>
+<header class="topbar">
+  <div class="brand"><span class="brand-mark">NC</span><span>Neon Coast <em>Cover Studio</em></span></div>
+  <p class="tagline">Your photo + a caption → poster cover art. Photos never leave this machine.</p>
+</header>
+<main class="studio">
+  <section class="stage-wrap">
+    <canvas id="stage" width="1080" height="1080" aria-label="Cover preview"></canvas>
+    <img id="shotImg" alt="Exported cover" hidden>
+    <p class="stage-hint" id="stageHint">Click a panel to select it · drag to move its photo · scroll to zoom · Ctrl+Z to undo</p>
+  </section>
+  <aside class="panel" aria-label="Cover controls">
+    <section class="group">
+      <h2>1 · Photos</h2>
+      <label class="file-btn">Add your photos…
+        <input id="fileInput" type="file" accept="image/*" multiple>
+      </label>
+      <div class="row" id="sampleRow" aria-label="Sample photos"></div>
+      <div class="row wrap" id="uploadStrip" aria-label="Your uploaded photos"></div>
+      <div class="row">
+        <button id="fillAllBtn" type="button" class="btn ghost">Fill all panels with this photo</button>
+        <button id="clearBtn" type="button" class="btn ghost">Clear panel</button>
+      </div>
+      <p class="fine"><span id="panelLabel">Panel 1 of 4</span> selected. Drag the photo inside it, or use zoom:</p>
+      <div class="row zoom-row">
+        <button id="zoomOutBtn" type="button" class="btn small" aria-label="Zoom out">−</button>
+        <input id="zoomRange" type="range" min="100" max="400" value="100" step="1" aria-label="Zoom">
+        <button id="zoomInBtn" type="button" class="btn small" aria-label="Zoom in">+</button>
+        <span id="zoomLabel">100%</span>
+        <button id="resetPanBtn" type="button" class="btn small ghost">Reset</button>
+      </div>
+    </section>
+    <section class="group">
+      <h2>2 · Layout</h2>
+      <div class="grid" id="layoutRow"></div>
+    </section>
+    <section class="group">
+      <h2>3 · Grade</h2>
+      <div class="grid" id="gradeRow"></div>
+    </section>
+    <section class="group">
+      <h2>4 · Words</h2>
+      <label>Title <input id="titleInput" type="text" maxlength="30" value="NEON COAST"></label>
+      <label>Subtitle <input id="subtitleInput" type="text" maxlength="48" value="chasing the last light"></label>
+      <label>Tag line <input id="tagInput" type="text" maxlength="48" value="EST. 2026 · OCEAN DRIVE"></label>
+      <div class="row stars-row" id="starRow" aria-label="Heat meter"></div>
+    </section>
+    <section class="group">
+      <h2>5 · Finish</h2>
+      <div class="row checks">
+        <label class="check"><input id="grainToggle" type="checkbox" checked> Film grain</label>
+        <label class="check"><input id="vignetteToggle" type="checkbox" checked> Vignette</label>
+        <label class="check"><input id="halftoneToggle" type="checkbox"> Halftone</label>
+      </div>
+      <div class="row">
+        <button id="undoBtn" type="button" class="btn ghost">↩ Undo</button>
+        <button id="redoBtn" type="button" class="btn ghost">↪ Redo</button>
+      </div>
+      <div class="row">
+        <label class="size-label">Size</label>
+        <div class="grid grow" id="sizeRow"></div>
+      </div>
+    </section>
+    <section class="group export-group">
+      <h2>6 · Export PNG</h2>
+      <div class="grid">
+        <button type="button" class="btn primary" data-export="square">Square 1080 × 1080</button>
+        <button type="button" class="btn primary" data-export="portrait">Portrait 1080 × 1350</button>
+        <button type="button" class="btn primary" data-export="wide">Wide 1920 × 1080</button>
+        <button type="button" class="btn accent" data-export="all">Export all three</button>
+      </div>
+      <p id="status" class="status" role="status">Pick a photo to begin — or try the samples.</p>
+    </section>
+    <p class="fine">Offline by design: no uploads, no accounts, no watermarks. Fonts Anton &amp; Pacifico (SIL OFL) ship inside the app. Sample photos are AI-made illustrations, free to use.</p>
+  </aside>
+</main>
+<script type="module" src="./src/main.js"></script>
+</body>
+</html>
